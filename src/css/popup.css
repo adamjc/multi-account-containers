@@ -925,6 +925,29 @@ span ~ .panel-header-text {
   padding-block-end: 6px;
 }
 
+#add-site-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-block-end: 6px;
+  padding-inline-end: 16px;
+  padding-inline-start: 16px;
+}
+
+#add-site {
+  display: flex;
+}
+
+#add-site-input {
+  margin-inline-end: 6px;
+}
+
+#add-site-container-text {  
+  font-size: 14px;
+  font-weight: normal;
+  padding-block-end: 6px;
+}
+
 /* Achievement panel elements */
 .share-ctas {
   padding-block-end: 0.5em;

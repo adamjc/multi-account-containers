@@ -987,8 +987,8 @@ Logic.registerPanel(P_CONTAINER_EDIT, {
       this._submitForm();
     });
 
-    const addUrl = document.getElementById("add-site-button");
-    addUrl.addEventListener("click", () => {
+    const addUrlButton = document.getElementById("add-site-button");
+    addUrlButton.addEventListener("click", () => {
       const url = document.getElementById("add-site-input").value;
       this._addUrl(url);
     });
