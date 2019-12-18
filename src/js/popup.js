@@ -987,7 +987,30 @@ Logic.registerPanel(P_CONTAINER_EDIT, {
       this._submitForm();
     });
 
+    const addUrl = document.getElementById("add-site-button");
+    addUrl.addEventListener("click", () => {
+      const url = document.getElementById("add-site-input").value
+      this._addUrl(url);
+    });
+  },
 
+  async _addUrl(url) {
+    try {
+      const formValues = new FormData(this._editForm);
+      const currentTab = await Logic.currentTab();
+      // throw new Error(JSON.stringify(currentTab, null, 2))
+      await browser.runtime.sendMessage({
+        method: "setOrRemoveAssignment",
+        tabId: currentTab.id, 
+        url,
+        userContextId: formValues.get("container-id") || NEW_CONTAINER_ID,
+        value: false
+      });
+      const assignments = await Logic.getAssignmentObjectByContainer(formValues.get("container-id"));
+      this.showAssignedContainers(assignments);
+    } catch (e) {
+      throw new Error(e)
+    }
   },
 
   async _submitForm() {

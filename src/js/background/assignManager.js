@@ -399,11 +399,12 @@ const assignManager = {
       await this.storageArea.remove(pageUrl);
       actionName = "removed";
     }
+
     browser.tabs.sendMessage(tabId, {
       text: `Successfully ${actionName} site to always open in this container`
-    });
-    const tab = await browser.tabs.get(tabId);
-    this.calculateContextMenu(tab);
+    }).catch(e => new Error(e));
+    const tab = await browser.tabs.get(tabId).then(this.calculateContextMenu).catch(e => new Error(e))
+    // this.calculateContextMenu(tab);
   },
 
   async _getAssignment(tab) {
