@@ -69,4 +69,26 @@ describe("Assignment Feature", () => {
       });
     });
   });
+
+  describe("manually adding a site", () => {
+    it("should assign the site to the container when a site is added into the input field and the 'add' button is pressed", async () => {
+      // We need to add a container so we can use this._editForm information
+      // Then _check_ the container has the correct information
+
+      popup.document.getElementById("edit-container-panel-name-input").value = "a container"
+      console.log(popup.document.getElementById("edit-container-panel-form"))
+      popup.document.getElementById("add-site-input").value = "https://www.mozilla.org"
+      await nextTick();
+
+      
+      await helper.popup.clickElementById("add-site-button");
+
+      // console.log(browser.storage.local);
+    })
+
+    it("should open the site in the container it has been assigned to when a new tab opens the site URL", () => {
+      // Make a new tab with that URL
+      // See if the tab is in the correct container
+    })
+  });
 });

@@ -997,15 +997,10 @@ Logic.registerPanel(P_CONTAINER_EDIT, {
   async _addUrl(url) {
     try {
       const formValues = new FormData(this._editForm);
+      const userContextId = formValues.get("container-id") || NEW_CONTAINER_ID;
       const currentTab = await Logic.currentTab();
-
-      await browser.runtime.sendMessage({
-        method: "setOrRemoveAssignment",
-        tabId: currentTab.id,
-        url,
-        userContextId: formValues.get("container-id") || NEW_CONTAINER_ID,
-        value: false
-      });
+      
+      await Logic.setOrRemoveAssignment(currentTab.id, url, userContextId, false)
 
       const assignments = await Logic.getAssignmentObjectByContainer(formValues.get("container-id"));
       this.showAssignedContainers(assignments);
