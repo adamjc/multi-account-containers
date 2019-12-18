@@ -989,7 +989,7 @@ Logic.registerPanel(P_CONTAINER_EDIT, {
 
     const addUrl = document.getElementById("add-site-button");
     addUrl.addEventListener("click", () => {
-      const url = document.getElementById("add-site-input").value
+      const url = document.getElementById("add-site-input").value;
       this._addUrl(url);
     });
   },
@@ -998,18 +998,19 @@ Logic.registerPanel(P_CONTAINER_EDIT, {
     try {
       const formValues = new FormData(this._editForm);
       const currentTab = await Logic.currentTab();
-      // throw new Error(JSON.stringify(currentTab, null, 2))
+
       await browser.runtime.sendMessage({
         method: "setOrRemoveAssignment",
-        tabId: currentTab.id, 
+        tabId: currentTab.id,
         url,
         userContextId: formValues.get("container-id") || NEW_CONTAINER_ID,
         value: false
       });
+
       const assignments = await Logic.getAssignmentObjectByContainer(formValues.get("container-id"));
       this.showAssignedContainers(assignments);
     } catch (e) {
-      throw new Error(e)
+      throw new Error(e);
     }
   },
 
